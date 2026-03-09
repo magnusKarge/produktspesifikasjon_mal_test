@@ -1,0 +1,62 @@
+@startuml
+title Ankringsforhold - Objekttyper
+
+skinparam backgroundColor #F5F5F5
+skinparam shadowing false
+skinparam RoundCorner 6
+skinparam ArrowColor #6C8198
+skinparam class {
+  BackgroundColor #FBF2E8
+  BorderColor #9C8578
+  FontColor #2D201A
+  HeaderBackgroundColor #EFE1D6
+  HeaderFontColor #2D201A
+  AttributeIconSize 0
+}
+skinparam note {
+  BackgroundColor #FFFFFF
+  BorderColor #6C8198
+  FontColor #2D201A
+}
+skinparam stereotypeCBackgroundColor #EAD9CE
+skinparam stereotypeCBorderColor #9C8578
+skinparam stereotypeCFontColor #2D201A
+
+package "Objekttyper" {
+
+  abstract class FellesegenskaperLosmasse <<featureType>> {
+    + geolPavisningstype [0..1] : GeolPavisningstype
+    + geolPavisningstypeNavn [0..1] : CharacterString
+    + temakvalitet [0..1] : TemaKvalitet
+    + datauttaksdato [1] : Date
+    + førsteDigitaliseringsdato [1] : Date
+    + oppdateringsdato [0..1] : Date
+    + kvalitet [1] : Posisjonskvalitet
+    + medium [1] : Medium
+    + mediumNavn [1] : CharacterString
+    + opphav [1] : CharacterString
+  }
+
+  abstract class LosmasseGrense <<featureType>> {
+    ' Ingen attributter
+  }
+
+  class AnkringOmr <<featureType>> {
+    + område [1] : Flate
+    + ankringsforhold [1] : Ankringsforhold
+    + ankringsforholdNavn [1] : CharacterString
+  }
+
+  class Posisjonskvalitet {
+    + målemetode [1] : Målemetode
+    + målemetodeNavn [1] : CharacterString
+    + nøyaktighet [0..1] : Integer
+  }
+}
+
+  LosmasseGrense <|-- FellesegenskaperLosmasse
+  GenerelleEgenskaperAnkringOmr <|-- AnkringOmr
+  AnkringOmr --> Dataavgrensning : avgrensning [0..*]
+  AnkringOmr --> GeolAvgrLinje : avgrensning [0..*]
+
+@enduml
