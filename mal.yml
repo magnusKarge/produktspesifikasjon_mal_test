@@ -1,10 +1,10 @@
-metadataId: 041f1e6e-bdbc-4091-b48f-8a5990f3cc5b
+metadataId: af992d03-3861-47b9-b3e9-f0b985055a07
 output_directory: produktspesifikasjon
 product_slug: admenheter
-updated: 2025-01-01
+updated: 2025-03-09
 # 
 #ogc_feature_api: https://kos-pygeoapi.atkv3-dev.kartverket.cloud/collections
-#xmi_url: https://sosi.geonorge.no/svn/SOSI/SOSI Del 3/Statens kartverk/Havnedata_testing.xml
+xmi_url: https://sosi.geonorge.no/svn/SOSI/SOSI Del 3/NGU/Ankringsforhold-1.0.xml
 #include_only_features:
 #  - Uttak
 #
