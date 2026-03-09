@@ -1,0 +1,655 @@
+[
+  {
+    "name": "FellesegenskaperLosmasse",
+    "description": "abstrakt objekt som bærer en rekke egenskaper som er fagområde-uavhengige og kan benyttes for alle objekttyper\n\nMerknad:\nSpesielt i produktspesifikasjonsarbeid vil en velge egenskaper og avgrensningslinjer fra denne klassen.",
+    "attributes": [
+      {
+        "name": "datauttaksdato",
+        "type": "DateTime",
+        "description": "dato for uttak fra en database\n\nMerknad:\nSkiller seg fra Kopidato ved at en ikke skiller på om det er uttak fra en originaldatabase eller en kopidatabase.",
+        "cardinality": "1"
+      },
+      {
+        "name": "førsteDigitaliseringsdato",
+        "type": "DateTime",
+        "description": "dato når en representasjon av objektet i digital form første gang ble etablert\n\nMerknad:\nførsteDigitaliseringsdato kan skille seg fra førsteDatafangstdato ved at den første datafangsten skjedde analogt og gjort om til digital form senere i en produksjonsprosess.\nEventuelt at innlegging i databasen skjedde på et senere tidspunkt enn registreringen /observasjonen / målingen av objektet.",
+        "cardinality": "1"
+      },
+      {
+        "name": "oppdateringsdato",
+        "type": "DateTime",
+        "description": "dato for siste endring på objektetdataene\n\nMerknad:\nOppdateringsdato kan være forskjellig fra Datafangsdato ved at data som er registrert kan bufres en kortere eller lengre periode før disse legges inn i datasystemet (databasen).\n\n-Definition-\nDate and time at which this version of the spatial object was inserted or changed in the spatial data set.",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "kvalitet",
+        "type": "Posisjonskvalitet",
+        "description": "beskrivelse av kvaliteten på stedfestingen\n\nMerknad: Denne er identisk med ..KVALITET i tidligere versjoner av SOSI.",
+        "cardinality": "1",
+        "attributes": [
+          {
+            "name": "målemetode",
+            "type": "Målemetode",
+            "description": "kode på metode for måling i grunnriss (x,y), og høyde (z) når metoden er den samme som ved måling i grunnriss",
+            "cardinality": "1",
+            "valueDomain": {
+              "listedValues": [
+                {
+                  "value": "Terrengmålt: Uspesifisert måleinstrument",
+                  "label": "Målt i terrenget , uspesifisert metode/måleinstrument"
+                },
+                {
+                  "value": "Terrengmålt: Totalstasjon",
+                  "label": "Målt i terrenget med totalstasjon"
+                },
+                {
+                  "value": "Terrengmålt: Teodolitt og el avstandsmåler",
+                  "label": "Målt i terrenget med teodolitt og elektronisk avstandsmåler"
+                },
+                {
+                  "value": "Terrengmålt: Teodolitt og målebånd",
+                  "label": "Målt i terrenget med teodolitt og målebånd"
+                },
+                {
+                  "value": "Terrengmålt: Ortogonalmetoden",
+                  "label": "Målt i terrenget, ortogonalmetoden"
+                },
+                {
+                  "value": "Utmål",
+                  "label": "Punkt beregnet på bakgrunn av måling mot andre punkter, slik som to avstander eller avstand og retning\n\n-- Definition --\nPoint calculated on the basis of other items, such as two distances or distance + direction."
+                },
+                {
+                  "value": "Tatt fra plan",
+                  "label": "Tatt fra plan eller godkjent tiltak"
+                },
+                {
+                  "value": "Annet  (denne har ingen mening, bør fjernes?)",
+                  "label": "Annet"
+                },
+                {
+                  "value": "Stereoinstrument",
+                  "label": "Målt i stereoinstrument, uspesifisert instrument"
+                },
+                {
+                  "value": "Aerotriangulert",
+                  "label": "Punkt beregnet ved aerotriangulering\n\n-- Definition --\nPoint calculated by aerotriangulation"
+                },
+                {
+                  "value": "Stereoinstrument: Analytisk plotter",
+                  "label": "Målt i stereoinstrument, analytisk plotter"
+                },
+                {
+                  "value": "Stereoinstrument: Autograf",
+                  "label": "Målt i stereoinstrument, autograf, analogt instrument"
+                },
+                {
+                  "value": "Stereoinstrument: Digitalt",
+                  "label": "Målt i stereoinstrument, digitalt instrument"
+                },
+                {
+                  "value": "Scannet fra kart",
+                  "label": "Geometri overført fra kart maskinelt ved hjelp av skanner, uspesifisert kartmedium"
+                },
+                {
+                  "value": "Skannet fra kart: Blyantoriginal",
+                  "label": "Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er blyantoriginal"
+                },
+                {
+                  "value": "Skannet fra kart: Rissefolie",
+                  "label": "Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er rissefolie"
+                },
+                {
+                  "value": "Skannet fra kart: Transparent folie, god kvalitet",
+                  "label": "Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er transparent folie av  god kvalitet."
+                },
+                {
+                  "value": "Skannet fra kart: Transparent folie, mindre god kvalitet",
+                  "label": "Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er transparent folie av mindre god kvalitet"
+                },
+                {
+                  "value": "Skannet fra kart: Papirkopi",
+                  "label": "Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er papirkopi."
+                },
+                {
+                  "value": "Flybåren laserscanner",
+                  "label": "Målt med laserskanner fra fly"
+                },
+                {
+                  "value": "Bilbåren laser",
+                  "label": "Målt med laserskanner plassert i kjøretøy"
+                },
+                {
+                  "value": "Lineær referanse",
+                  "label": "brukes for objekter som er stedfestet med lineær referanse, enten disse leveres med stedfesting kun som lineære referanser, eller med koordinatgeometri avledet fra lineære referanser"
+                },
+                {
+                  "value": "Digitaliseringbord: Ortofoto eller flybilde",
+                  "label": "Geometri overført fra ortofoto eller flybilde ved hjelp av manuell registrering på et digitaliseringsbord, uspesifisert bildemedium"
+                },
+                {
+                  "value": "Digitaliseringbord: Ortofoto, film",
+                  "label": "Geometri overført fra ortofoto ved hjelp av manuell registrering på et digitaliseringsbord. Bildemedium er film"
+                },
+                {
+                  "value": "Digitaliseringbord: Ortofoto, fotokopi",
+                  "label": "Geometri overført fra ortofoto ved hjelp av manuell registrering på et digitaliseringsbord. Bildemedium er fotokopi"
+                },
+                {
+                  "value": "Digitaliseringbord: Flybilde, film",
+                  "label": "Geometri overført fra flybilde ved hjelp av manuell registrering på et digitaliseringsbord. Bildemedium er film"
+                },
+                {
+                  "value": "Digitaliseringbord: Flybilde, fotokopi",
+                  "label": "Geometri overført fra flybilde ved hjelp av manuell registrering på et digitaliseringsbord. Bildemedium er fotokopi"
+                },
+                {
+                  "value": "Digitalisert på skjerm fra ortofoto",
+                  "label": "Geometri overført fra ortofoto ved hjelp av manuell registrering på skjerm"
+                },
+                {
+                  "value": "Digitalisert på skjerm fra satellittbilde",
+                  "label": "Geometri overført fra satellittbilde ved hjelp av manuell registrering på skjerm"
+                },
+                {
+                  "value": "Digitalisert på skjerm fra andre digitale rasterdata",
+                  "label": "Digitalisert på skjerm fra andre digitale rasterdata"
+                },
+                {
+                  "value": "Digitalisert på skjerm fra tolkning av seismikk",
+                  "label": "Digitalisert på skjerm fra tolkning av seismikk"
+                },
+                {
+                  "value": "Vektorisering av laserdata",
+                  "label": "Vektorisering fra laserdata, brukes også der vektoriseringen støttes av ortofoto"
+                },
+                {
+                  "value": "Digitaliseringsbord: Kart",
+                  "label": "Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord, medium uspesifisert"
+                },
+                {
+                  "value": "Digitaliseringsbord: Kart, blyantoriginal",
+                  "label": "Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er blyantoriginal"
+                },
+                {
+                  "value": "Digitaliseringsbord: Kart, rissefoile",
+                  "label": "Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er rissefolie"
+                },
+                {
+                  "value": "Digitaliseringsbord: Kart, transparent foile, god kvalitet",
+                  "label": "Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er transparent folie av god kvalitet, samkopi"
+                },
+                {
+                  "value": "Digitaliseringsbord: Kart, transparent foile, mindre god kvalitet",
+                  "label": "Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er transparent folie av mindre god kvalitet, samkopi"
+                },
+                {
+                  "value": "Digitaliseringsbord: Kart, papirkopi",
+                  "label": "Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er papirkopi"
+                },
+                {
+                  "value": "Digitalisert på skjerm fra skannet kart",
+                  "label": "Geometri overført fra kart ved hjelp av manuell registrering på skjerm, medium skannet kart (raster), samkopi"
+                },
+                {
+                  "value": "Genererte data (interpolasjon)",
+                  "label": "Genererte data, interpolasjonsmetode. Ikke nærmere spesifisert"
+                },
+                {
+                  "value": "Genererte data (interpolasjon): Terrengmodell",
+                  "label": "Genererte data, interpolasjonsmetode, fra terrengmodell"
+                },
+                {
+                  "value": "Genererte data (interpolasjon): Vektet middel",
+                  "label": "Genererte data, interpolasjonsmetode, vektet middel"
+                },
+                {
+                  "value": "Genererte data: Fra annen geometri",
+                  "label": "Genererte data: Sirkelgeometri, korridor eller annen geometri generert ut fra f.eks et punkt eller en linje (f.eks midtlinje veg)"
+                },
+                {
+                  "value": "Genererte data: Generalisering",
+                  "label": "Genererte data: Generalisering"
+                },
+                {
+                  "value": "Genererte data: Sentralpunkt",
+                  "label": "Genererte data: Sentralpunkt"
+                },
+                {
+                  "value": "Genererte data: Sammenknytningspunkt, randpunkt",
+                  "label": "Genererte data: Sammenknytningspunkt (f.eks mellom ulike kartlegginger), randpunkt (f.eks mellom ulike kilder til kart)"
+                },
+                {
+                  "value": "Koordinater hentet fra GAB",
+                  "label": "Koordinater hentet fra GAB, forløperen til registerdelen av matrikkelen"
+                },
+                {
+                  "value": "Koordinater hentet fra JREG",
+                  "label": "Koordinater hentet fra JREG, jordregisteret"
+                },
+                {
+                  "value": "Beregnet",
+                  "label": "Beregnet, uspesifisert hvordan"
+                },
+                {
+                  "value": "Spesielle metoder",
+                  "label": "Spesielle metoder, uspesifisert"
+                },
+                {
+                  "value": "Spesielle metoder: Målt med stikkstang",
+                  "label": "Spesielle metoder: Målt med stikkstang"
+                },
+                {
+                  "value": "Spesielle metoder: Målt med waterstang",
+                  "label": "Spesielle metoder: Målt med waterstang"
+                },
+                {
+                  "value": "Spesielle metoder: Målt med målehjul",
+                  "label": "Spesielle metoder: Målt med målehjul"
+                },
+                {
+                  "value": "Spesielle metoder: Målt med stigningsmåler",
+                  "label": "Spesielle metoder: Målt med stigningsmåler"
+                },
+                {
+                  "value": "Fastsatt punkt",
+                  "label": "Punkt fastsatt ut fra et grunnlag (kart, bilde), f.eks ved partenes enighet ved en oppmålingsforretning"
+                },
+                {
+                  "value": "Fastsatt ved dom eller kongelig resolusjon",
+                  "label": "Geometri fastsatt ved dom, lov, traktat eller kongelig resolusjon"
+                },
+                {
+                  "value": "Annet (spesifiseres i filhode) ( bør vel fjernes, blir borte ved overføring mellom systemer)",
+                  "label": "Annet (spesifiseres i filhode)"
+                },
+                {
+                  "value": "Frihåndstegning",
+                  "label": "Digitalisert ut fra frihåndstegning.  Frihåndstegning er basert på svært grovt grunnlag eller ikke noe grunnlag"
+                },
+                {
+                  "value": "Frihåndstegning på kart",
+                  "label": "Digitalisert fra krokering på kart, dvs grovt skissert på kart"
+                },
+                {
+                  "value": "Frihåndstegning på skjerm",
+                  "label": "Digitalisert ut fra frihåndstegning (direkte på skjerm). Frihåndstegning er basert på svært grovt grunnlag eller ikke noe grunnlag"
+                },
+                {
+                  "value": "Treghetsstedfesting",
+                  "label": "Treghetsstedfesting"
+                },
+                {
+                  "value": "GNSS: Kodemåling, relative målinger",
+                  "label": "Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO): Kodemåling, relative målinger."
+                },
+                {
+                  "value": "GNSS: Kodemåling, enkle målinger",
+                  "label": "Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO): Kodemåling, enkle målinger."
+                },
+                {
+                  "value": "GNSS: Fasemåling, statisk måling",
+                  "label": "Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO): Fasemåling statisk måling."
+                },
+                {
+                  "value": "GNSS: Fasemåling, andre metoder",
+                  "label": "Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO): Fasemåling andre metoder."
+                },
+                {
+                  "value": "Kombinasjon av GNSS/Treghet",
+                  "label": "Kombinasjon av GPS/Treghet"
+                },
+                {
+                  "value": "GNSS: Fasemåling RTK",
+                  "label": "Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO).: Fasemåling RTK (realtids kinematisk måling)"
+                },
+                {
+                  "value": "GNSS: Fasemåling , float-løsning",
+                  "label": "Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO). Fasemåling float-løsning"
+                },
+                {
+                  "value": "Ukjent målemetode",
+                  "label": "Målemetode er ukjent"
+                }
+              ],
+              "definition": "metode som ligger til grunn for registrering av posisjon\n\n\n-- Definition - -\nmethod on which registration of position is based"
+            }
+          },
+          {
+            "name": "målemetodeNavn",
+            "type": "CharacterString",
+            "description": "navn på metode for måling i grunnriss (x,y), og høyde (z) når metoden er den samme som ved måling i grunnriss",
+            "cardinality": "1"
+          },
+          {
+            "name": "nøyaktighet",
+            "type": "Integer",
+            "description": "punktstandardavviket i grunnriss for punkter samt tverravvik for linjer\n\nMerknad:\nOppgitt i cm",
+            "cardinality": "0..1"
+          }
+        ]
+      },
+      {
+        "name": "medium",
+        "type": "Medium",
+        "description": "objektets beliggenhet i forhold til jordoverflaten\n\nEksempel:\nPå bro, i tunnel, inne i et bygningsmessig anlegg, etc.",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Alltid i vann",
+              "label": "Alltid i vann"
+            },
+            {
+              "value": "I bygning/bygningsmessig anlegg",
+              "label": "I bygning/bygningsmessig anlegg"
+            },
+            {
+              "value": "I luft",
+              "label": "I luft"
+            },
+            {
+              "value": "På isbre",
+              "label": "På isbre"
+            },
+            {
+              "value": "På sjøbunnen",
+              "label": "På sjøbunnen"
+            },
+            {
+              "value": "På terrenget/på bakkenivå",
+              "label": "default"
+            },
+            {
+              "value": "På vannoverflaten",
+              "label": "På vannoverflaten"
+            },
+            {
+              "value": "Tidvis under vann",
+              "label": "Tidvis under vann"
+            },
+            {
+              "value": "Under isbre",
+              "label": "Under isbre"
+            },
+            {
+              "value": "Under sjøbunnen",
+              "label": "Under sjøbunnen"
+            },
+            {
+              "value": "Under terrenget",
+              "label": "Under terrenget"
+            },
+            {
+              "value": "Ukjent",
+              "label": "ukjent"
+            }
+          ],
+          "definition": "objektets beliggenhet i forhold til jordoverflaten\n\nEksempel:\nVeg på bro, i tunnel, inne i et bygningsmessig anlegg, etc."
+        }
+      },
+      {
+        "name": "mediumNavn",
+        "type": "CharacterString",
+        "description": "objektets beliggenhet i forhold til jordoverflaten\n\nEksempel:\nPå bro, i tunnel, inne i et bygningsmessig anlegg, etc.",
+        "cardinality": "1"
+      },
+      {
+        "name": "opphav",
+        "type": "CharacterString",
+        "description": "referanse til opphavsmaterialet, kildematerialet, organisasjons/publiseringskilde\n\nMerknad:\nKan også beskrive navn på person og årsak til oppdatering",
+        "cardinality": "1"
+      }
+    ],
+    "abstract": true,
+    "relationships": {
+      "inheritance": [
+        "LosmasseGrense"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "LosmasseGrense",
+    "description": "avgrensning av ulike typer løsmasser (jordarter)",
+    "attributes": [
+      {
+        "name": "geolPavisningstype",
+        "type": "GeolPavisningstype",
+        "description": "hvor sikkert et geologisk objekt er påvist i terrenget, eller hvilken metode som ligger til grunn for å påvisningen/registreringen\n-- Definition -- with what certainty a geological object has been identified in the terrain, or on which method the identification/registration is based",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Ikke spesifisert",
+              "label": "Ikke spesifisert"
+            },
+            {
+              "value": "Sikker påvisning/observasjon",
+              "label": "Avgrensningen eller registreringen av objektet er påvist eller observert i felt"
+            },
+            {
+              "value": "Usikker påvisning/observasjon",
+              "label": "Ikke påvist/observert men antatt avgrensning/registrering av objekt"
+            },
+            {
+              "value": "Konstruert avgrensning",
+              "label": "Tilfeldig plassert avgrensning og meget usikker.  Benyttes blant annet under vann- eller breoverflater"
+            },
+            {
+              "value": "Geofysisk tolket grense",
+              "label": "Avgrensning basert på geofysiske indikasjoner"
+            },
+            {
+              "value": "Dårlig synlig avgrensning i terrenget",
+              "label": "Basert på generalisert tolkning av objekter med små innbyrdes variasjoner (f.eks. skille mellom tynt humusdekke og bart fjell, eller mellom to svært like bergarter)"
+            },
+            {
+              "value": "Overgangsmessig grense",
+              "label": "Glidende overgang mellom to bergarter,  jordarter o.l."
+            },
+            {
+              "value": "Tolket avgrensning/registrering",
+              "label": "Avgrensninger av geologisk objekt eller delobjekt fremkommet ved generalisering, samtolkning eller aggregering"
+            },
+            {
+              "value": "Flyfototolket objekt eller delobjekt",
+              "label": "Flyfototolket objekt eller delobjekt"
+            },
+            {
+              "value": "Observasjon med usikker geografisk beliggenhet",
+              "label": "Observasjon med usikker geografisk beliggenhet"
+            },
+            {
+              "value": "Avgrensning ikke basert på geologi",
+              "label": "Der f.eks. en administrativ grense eller kystkontur har bidratt til avgrensning av et geologisk objekt"
+            },
+            {
+              "value": "Avgrensning basert på geofysiske data/metoder verifisert ved prøvetaking",
+              "label": "Avgrensning basert på geofysiske data/metoder verifisert ved prøvetaking"
+            },
+            {
+              "value": "Avgrensning basert på tolkning av tilgjengelige geologiske/geofysiske data (varierende oppløsning), litteratur og kart",
+              "label": "Avgrensning basert på tolkning av tilgjengelige geologiske/geofysiske data (varierende oppløsning), litteratur og kart"
+            },
+            {
+              "value": "Avgrensning basert på geologisk observasjon i felt, prøvetaking og analyser",
+              "label": "Avgrensning basert på geologisk observasjon i felt, prøvetaking og analyser"
+            },
+            {
+              "value": "Tolket avgrensning basert på tilgjengelig geologisk kartlegging",
+              "label": "Tolket avgrensning basert på tilgjengelig geologisk kartlegging"
+            },
+            {
+              "value": "Avgrensning basert på prøvetaking",
+              "label": "Avgrensning basert på prøvetaking"
+            },
+            {
+              "value": "Avgrensning basert på seismikk",
+              "label": "Avgrensning basert på seismikk"
+            },
+            {
+              "value": "Avgrensning basert på detaljerte dybdedata",
+              "label": "Avgrensning ved bruk av multistråleekkolodd eller interferometrisk sonar"
+            },
+            {
+              "value": "Avgrensning basert på backscatter data/sidescan.sonar",
+              "label": "Avgrensning basert på bunnreflektivitet/data fra sidescan.sonar"
+            },
+            {
+              "value": "Avgrensning basert på prøvetaking og akustiske data/metoder",
+              "label": "Avgrensning basert på prøvetaking og akustiske data/metoder"
+            },
+            {
+              "value": "Avgrensning basert på akustiske data/metoder",
+              "label": "Avgrensning basert på akustiske data/metoder"
+            },
+            {
+              "value": "Avgrensning basert på flere metoder/datatyper",
+              "label": "Avgrensning basert på flere metoder/datatyper"
+            },
+            {
+              "value": "Avgrensning basert på undervannsfoto og/eller -video",
+              "label": "Avgrensning basert på undervannsfoto og/eller -video"
+            },
+            {
+              "value": "Aavgrensning basert på akustiske data/metoder verifisert ved prøvetaking, foto o.l.",
+              "label": "Avgrensning basert på akustiske data/metoder verifisert ved prøvetaking, foto o.l."
+            },
+            {
+              "value": "Avgrensningen er foretatt ut fra tolkning basert på tilgjengelige batymetriske data (varierende oppløsning), litteratur og kart",
+              "label": "Avgrensningen er foretatt ut fra tolkning basert på tilgjengelige batymetriske data (varierende oppløsning), litteratur og kart"
+            },
+            {
+              "value": "Avgrensning basert på Lidardata, flyfoto og/eller multi-/hyperspektrale bilder og eksisterende geologisk informasjon",
+              "label": "Avgrensning basert på Lidardata, flyfoto og/eller multi-/hyperspektrale bilder og eksisterende geologisk informasjon"
+            },
+            {
+              "value": "Avgrensning basert på romlig modellering med utgangspunkt i detaljerte dybdedata",
+              "label": "Avgrensning basert på romlig modellering med utgangspunkt i detaljerte dybdedata"
+            },
+            {
+              "value": "Avgrensning basert på romlig modellering med utgangspunkt i detaljerte dybdedata, prøvetaking samt fysiske datasett som strøm, bølger, eksponering og lysforhold",
+              "label": "Avgrensning basert på romlig modellering med utgangspunkt i detaljerte dybdedata, prøvetaking samt fysiske datasett som strøm, bølger, eksponering og lysforhold"
+            }
+          ],
+          "definition": "hvor sikkert et geologisk objekt er påvist i terrenget, eller hvilken metode som ligger til grunn for påvisningen/registreringen"
+        }
+      },
+      {
+        "name": "geolPavisningstypeNavn",
+        "type": "CharacterString",
+        "description": "hvor sikkert et geologisk objekt er påvist i terrenget, eller hvilken metode som ligger til grunn for å påvisningen/registreringen.",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "temakvalitet",
+        "type": "TemaKvalitet",
+        "description": "kvaliteten på registrering/kartlegging av tema sett i forhold til faktiske forhold i naturen. Ulik tematisk oppløsning/generaliseringsgrad kan være styrt av temaets samfunnsmessige betydning, områdets arealmessige betydning eller prosjektets økonomi. Med nøyaktighet i denne sammenheng menes hvor korrekt registreringen avspeiler objektets posisjon i naturen og presisjonen i valg av tematisk innhold i forhold til generalisering\n\nMerknad: Tematisk oppløsning/generaliseringsgrad kan være styrt av temaets samfunnsmessige betydning, områdets arealmessige betydning eller prosjektets målsetning",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Høyest mulig posisjonell og tematisk nøyaktighet",
+              "label": "Den geologiske observasjonen/registreringen er stedfestet med høyest mulig posisjonell og tematisk nøyaktighet for direkte bruk i kommunenes reguleringsplaner (Målestokk under 1:20.000)\n\n-- Definition --\nThe geological observation/registration is georeferenced with the highest possible positional and thematic accuracy for direct use in municipal development plans (Scale under 1:20.000)"
+            },
+            {
+              "value": "Høy posisjonell- og tematisk nøyaktighet, høy oppløsning, lite generalisering",
+              "label": "Registrering basert på det som for naturinformasjon må anses å være av høy posisjonell- og tematisk nøyaktighet (+/- 20 m). Høy oppløsning og lite generalisering. Kan anvendes i kommuneplanens arealdel. Minste arealenhet er 0.5-1 dekar (~M 1: 20.000)"
+            },
+            {
+              "value": "God posisjonell- og tematisk nøyaktighet, god oppløsning, noe generalisert",
+              "label": "Registrering stedfestet med nøyaktighet i terrenget på +/- 50m, akseptabelt for oversiktsinformasjon på kommunenivå (arealplan). Minste arealenhet er ca. 2 dekar for viktige tema, ca. 5 dekar for øvrige (~M 1:50.000)"
+            },
+            {
+              "value": "Lav posisjonell- og tematisk nøyaktighet, lav oppløsning, med generalisering",
+              "label": "Registrering med lav oppløsning (+/- 100 m) og hvor det er gjort generalisering, ofte basert på flyfototolkning. Minste gjengitte arealenhet ca. 10 dekar for viktige tema, ca 20 dekar for de øvrige. Kan med forbehold benyttes som oversiktsinformasjon på kommunenivå (~M 1:100.000)"
+            },
+            {
+              "value": "Meget lav posisjonell- og tematisk nøyaktighet, meget lav oppløsning, stor grad generalisert",
+              "label": "Registrering basert på oversiktskartlegging i liten målestokk. Meget lav oppløsning (+/- 250 m) og kan inneholde stor grad av generalisering. Minste arealenhet er ca. 60 dekar. Bør kun anvendes til regionale oversikter (~M 1:250.000)"
+            },
+            {
+              "value": "Meget lav posisjonell- og tematisk nøyaktighet, sterkt generalisert",
+              "label": "Beregnet for oversiktskart i meget små målestokker. Minste arealenhet er ca. 1000 dekar. Anvendelsesområdet er landsoversikter og oversikt over store regioner (~M > 250.000)."
+            }
+          ],
+          "definition": "kvaliteten på registrering/kartlegging av tema sett i forhold til faktiske forhold i naturen. Ulik tematisk oppløsning/generaliseringsgrad kan være styrt av temaets samfunnsmessige betydning, områdets arealmessige betydning eller prosjektets økonomi. Med nøyaktighet i denne sammenheng menes hvor korrekt registreringen avspeiler objektets posisjon i naturen og presisjonen i valg av tematisk innhold i forhold til generalisering\n\nMerknad: Tematisk oppløsning/generaliseringsgrad kan være styrt av temaets samfunnsmessige betydning, områdets arealmessige betydning eller prosjektets målsetning\n\n\n-- Definition - -\nthe quality of the registration/mapping of a geological thematic subject validated in relation to the actual conditions in nature, position accuracy and the preferred scale of the cartographic representation.",
+          "asDictionary": "false",
+          "codeList": "http://skjema.geonorge.no/SOSI/produktspesifikasjon/MarineBunnsedimenterKornstørrelse-20201201/TemaKvalitet"
+        }
+      }
+    ],
+    "abstract": true,
+    "relationships": {
+      "inheritance": [],
+      "associations": []
+    }
+  },
+  {
+    "name": "AnkringOmr",
+    "description": "område som identifiserer ankrings- eller forankringsforhold på havbunnen",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "Flate",
+        "description": "objektets utstrekning",
+        "cardinality": "1"
+      },
+      {
+        "name": "ankringsforhold",
+        "type": "Ankringsforhold",
+        "description": "angivelse av ankringsforhold på havbunnen tolket ut fra bunntype og dybde",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Gode ankringsforhold (slambunn)",
+              "label": "Gode ankringsforhold (slambunn)"
+            },
+            {
+              "value": "Gode ankringsforhold (sand, grus)",
+              "label": "Gode ankringsforhold (sand, grus)"
+            },
+            {
+              "value": "Vanskelige ankringsforhold (hard steinrik bunn)",
+              "label": "Vanskelige ankringsforhold (hard steinrik bunn)"
+            },
+            {
+              "value": "Dårlige ankringsforhold (fjell dypere enn 30 m)",
+              "label": "Dårlige ankringsforhold (fjell dypere enn 30 m)"
+            },
+            {
+              "value": "Forankring mulig (fjell grunnere enn 30 m)",
+              "label": "Forankring mulig (fjell grunnere enn 30 m)"
+            }
+          ],
+          "definition": "angivelse av ankringsforhold på havbunnen tolket ut fra bunntype og dybde"
+        }
+      },
+      {
+        "name": "ankringsforholdNavn",
+        "type": "CharacterString",
+        "description": "angivelse av ankringsforhold på havbunnen tolket ut fra bunntype og dybde",
+        "cardinality": "1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "GenerelleEgenskaperAnkringOmr"
+      ],
+      "associations": [
+        {
+          "target": "Dataavgrensning",
+          "role": "avgrensning",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "GeolAvgrLinje",
+          "role": "avgrensning",
+          "cardinality": "0..*"
+        }
+      ]
+    }
+  }
+]
